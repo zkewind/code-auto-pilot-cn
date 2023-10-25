@@ -45,10 +45,10 @@ const prompt = new PromptTemplate({
 });
 
 /**
- * 
- * Generates a summary of the given file content by calling an external AI agent.
- * @param {string} fileContent - The content of the file to be summarized.
- * @returns {Promise<string>} A Promise that resolves to a string containing the summary of the file content.
+ *
+ * 通过调用外部 AI 代理生成给定文件内容的摘要。
+ * @param {string} fileContent - 要摘要的文件内容。
+ * @returns {Promise<string>} 一个 Promise，解析为包含文件内容摘要的字符串。
  */
 async function fileSummary(filePathRelative, fileContent) {
 	const model = getModel(process.env.INDEXER_MODEL);

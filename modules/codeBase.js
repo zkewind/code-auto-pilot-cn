@@ -4,31 +4,31 @@ const { calculateTokensCost } = require('./gpt');
 const chalk = require('chalk');
 
 /**
- * @description This function compares the files in a given codebase directory with the files in a database.
- * It identifies files that exist in the database but not on the filesystem, files that exist on the filesystem but not in the database, and files that have been modified on both the filesystem and in the database.
- * @param {string} codeBaseDirectory - The directory path of the codebase to be indexed.
+ * @description 这个函数将给定代码库目录中的文件与数据库中的文件进行比较。
+ * 它识别出存在于数据库中但不存在于文件系统中的文件，存在于文件系统中但不存在于数据库中的文件，以及在文件系统和数据库中都被修改的文件。
+ * @param {string} codeBaseDirectory - 要索引的代码库的目录路径。
  * @returns {Promise<{
 * filesToDelete: Array<{
-  * path: string, // The path of the file to be deleted from the database.
-  * timestamp: string, // The timestamp of the file when it was last modified in the database.
-  * hash: string // The hash of the file content in the database.
+  * path: string, // 要从数据库中删除的文件的路径。
+  * timestamp: string, // 文件在数据库中上次修改的时间戳。
+  * hash: string // 数据库中文件内容的哈希值。
   * }>,
   * filesToIndex: Array<{
-  * filePath: string, // The path of the file on the filesystem.
-  * fileTimestamp: string, // The timestamp of the file when it was last modified on the filesystem.
-  * fileContent: string // The content of the file on the filesystem.
+  * filePath: string, // 文件在文件系统中的路径。
+  * fileTimestamp: string, // 文件在文件系统上次修改的时间戳。
+  * fileContent: string // 文件在文件系统中的内容。
   * }>,
   * filesToReindex: Array<{
-  * filePath: string, // The path of the file on the filesystem.
-  * fileTimestamp: string, // The timestamp of the file when it was last modified on the filesystem.
-  * fileContent: string, // The content of the file on the filesystem.
-  * dbTimestamp: string, // The timestamp of the file when it was last modified in the database.
-  * dbHash: string // The hash of the file content in the database.
+  * filePath: string, // 文件在文件系统中的路径。
+  * fileTimestamp: string, // 文件在文件系统上次修改的时间戳。
+  * fileContent: string, // 文件在文件系统中的内容。
+  * dbTimestamp: string, // 文件在数据库中上次修改的时间戳。
+  * dbHash: string // 数据库中文件内容的哈希值。
   * }>
-  * }>} - A Promise that resolves to an object containing the following arrays:
- * filesToDelete: an array of objects representing the files that exist in the database but not on the filesystem.
- * filesToIndex: an array of objects representing the files that exist on the filesystem but not in the database.
- * filesToReindex: an array of objects representing the files that have been modified on both the filesystem and in the database.
+  * }>} - 一个 Promise，解析为包含以下数组的对象：
+ * filesToDelete: 一个包含表示存在于数据库中但不存在于文件系统中的文件的对象的数组。
+ * filesToIndex: 一个包含表示存在于文件系统中但不存在于数据库中的文件的对象的数组。
+ * filesToReindex: 一个包含表示在文件系统和数据库中都被修改的文件的对象的数组。
 */
 async function codeBaseGapFill(codeBaseDirectory){
   const { getDBFiles } = require('./db');

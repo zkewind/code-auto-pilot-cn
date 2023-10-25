@@ -44,16 +44,16 @@ const prompt = new PromptTemplate({
 });
 
 /**
- * Asynchronously suggests changes to a task's source code using an advanced model.
- * @param {string} task - The task to suggest changes for.
- * @param {Object} file - The file object containing the code to format.
- * @param {string} file.path - The path to the file.
- * @param {string} file.code - The code to format.
+ * 使用高级模型异步建议更改任务的源代码。
+ * @param {string} task - 要建议更改的任务。
+ * @param {Object} file - 包含要格式化的代码的文件对象。
+ * @param {string} file.path - 文件的路径。
+ * @param {string} file.code - 要格式化的代码。
  * @returns {Promise<Array<{
  * fileToUpdate: string,
  * content: string,
  * updateDependentFiles: boolean
- * }>>} - A Promise that resolves with an array of objects representing the suggested changes.
+ * }>>} - 一个Promise，解析为表示建议更改的对象数组。
  */
 async function suggestChanges(task, file) {
   const code = formatCode(file)

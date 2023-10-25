@@ -53,15 +53,15 @@ const prompt = new PromptTemplate({
 
 
 /**
- * Given a task and some summaries, returns a list of relevant files along with reasons why they were selected.
- * 
- * @param task - The task to be performed
- * @param summaries - A summary of the relevant context
+ * 给定一个任务和一些摘要，返回一个包含相关文件及其选择原因的列表。
+ *
+ * @param task - 要执行的任务
+ * @param summaries - 相关上下文的摘要
  * @returns {Promise<Array<{
- *   path: string,      // The path to the relevant file.
- *   reason: string,    // The reason why the file was selected.
- *   task: string,      // The task that will be implemented in this file.
- * }>>>}                // An array of relevant files for the given task.
+ *   path: string,      // 相关文件的路径。
+ *   reason: string,    // 选择该文件的原因。
+ *   task: string,      // 在该文件中将要实现的任务。
+ * }>>>}                // 给定任务的相关文件数组。
  */
 async function getRelevantFiles(task, summaries) {
 	const model = getModel(process.env.GET_FILES_MODEL);

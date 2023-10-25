@@ -1,29 +1,29 @@
 const { chunkSummaries } = require('./summaries');
 
-const testCases = [  
-  {    
-    name: 'Chunks summaries into two parts with max length of 10',    
-    summaries: 'Example summary 1\n---\nExample summary 2\n---\nExample summary 3\n---\nExample summary 4',    
-    maxChunkLength: 10,    
-    expected: [      
-      { summary: 'Example summary 1\n---\nExample summary 2' },      
-      { summary: 'Example summary 3\n---\nExample summary 4' },    
+const testCases = [
+  {
+    name: '将摘要分成两部分，每部分最大长度为10',
+    summaries: '示例摘要1\n---\n示例摘要2\n---\n示例摘要3\n---\n示例摘要4',
+    maxChunkLength: 10,
+    expected: [
+      { summary: '示例摘要1\n---\n示例摘要2' },
+      { summary: '示例摘要3\n---\n示例摘要4' },
     ],
   },
   {
-    name: 'Chunks a single summary with max length of 20',
-    summaries: 'This is a summary\n---\nThis is another summary',
+    name: '将单个摘要分成两部分，每部分最大长度为20',
+    summaries: '这是一个摘要\n---\n这是另一个摘要',
     maxChunkLength: 20,
-    expected: [{ summary: 'This is a summary\n---\nThis is another summary' }],
+    expected: [{ summary: '这是一个摘要\n---\n这是另一个摘要' }],
   },
   {
-    name: 'Chunks summaries into multiple parts with max length of 6',
-    summaries: 'Summary 1\n---\nSummary 2\n---\nSummary 3',
+    name: '将摘要分成多个部分，每部分最大长度为6',
+    summaries: '摘要1\n---\n摘要2\n---\n摘要3',
     maxChunkLength: 6,
     expected: [
-      { summary: 'Summary 1' },
-      { summary: 'Summary 2' },
-      { summary: 'Summary 3' },
+      { summary: '摘要1' },
+      { summary: '摘要2' },
+      { summary: '摘要3' },
     ],
   },
 ];

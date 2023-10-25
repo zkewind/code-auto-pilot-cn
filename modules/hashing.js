@@ -1,9 +1,9 @@
 const crypto = require('crypto');
 
 /**
- * Calculates a hash value for the specified file content.
- * @param {string} fileContent - The content of the file to calculate a hash value for.
- * @returns {string} - The hash value for the specified file content.
+ * 计算指定文件内容的哈希值。
+ * @param {string} fileContent - 要计算哈希值的文件内容。
+ * @returns {string} - 指定文件内容的哈希值。
 */
 function hashFile(fileContentInput){
     const fileContent = fileContentInput.replace(/\r\n/g, '\n').replace(/\r/g, '\n');

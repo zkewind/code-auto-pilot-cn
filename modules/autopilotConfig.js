@@ -2,9 +2,9 @@ const path = require('path');
 const autopilotDirectoryName = '.autopilot';
 
 /**
- * Returns the path of the directory containing the autopilot files within the codebase directory.
- * @param {string} codeBaseDirectory - The path of the codebase directory.
- * @returns {string} - The path of the autopilot config sub-directory.
+ * 返回代码库目录中包含自动驾驶文件的目录路径。
+ * @param {string} codeBaseDirectory - 代码库目录的路径。
+ * @returns {string} - 自动驾驶配置子目录的路径。
  */
 function getCodeBaseAutopilotDirectory(codeBaseDirectory) {
   return path.posix.join(codeBaseDirectory, autopilotDirectoryName);

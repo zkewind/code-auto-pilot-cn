@@ -2,11 +2,11 @@ const { OpenAI } = require('langchain/llms');
 
 /**
  *
- * Returns an instance of the specified language model.
- * @param {string} modelType - The type of language model to return.
-   * Currently Supported ['gpt-3.5-turbo', 'gpt-4'].
- * @returns {Object} - An instance of the specified language model.
- * @throws {Error} if the input model type is not supported
+ * 返回指定语言模型的实例。
+ * @param {string} modelType - 要返回的语言模型的类型。
+   * 目前支持的类型有 ['gpt-3.5-turbo', 'gpt-4']。
+ * @returns {Object} - 指定语言模型的实例。
+ * @throws {Error} 如果输入的模型类型不受支持。
  */
 function getModel(modelType){
     let model
@@ -21,7 +21,7 @@ function getModel(modelType){
             openAIApiKey: process.env.OPENAI_API_KEY,
         },{basePath:process.env.OPENAI_BASE_PATH})
     } else {
-        throw new Error(`Model type: ${modelType} not supported.`)
+        throw new Error(`不支持的模型类型：${modelType}`)
     }
     return model
 }

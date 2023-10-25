@@ -32,10 +32,10 @@ Another agent will look into the other files, your answer should focus on this f
 ` 
 
 /**
- * Asynchronously suggests changes to a task's source code using an advanced model.
- * @param {string} task - The task to suggest changes for.
- * @param {} file - A file to apply code to.
- * @returns {Promise<string>} - A Promise that resolves with the suggested changes.
+ * 使用高级模型异步建议更改任务的源代码。
+ * @param {string} task - 要建议更改的任务。
+ * @param {} file - 要应用代码的文件。
+ * @returns {Promise<string>} - 一个解析为建议更改的 Promise。
  */
 async function ChangesAdvice(task, payload) {
   const relevantFiles = formatRelevantFiles(payload.relevantFiles)

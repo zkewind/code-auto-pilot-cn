@@ -29,10 +29,10 @@ You are allowed to edit the information coming from the file-level summaries to 
 ` 
 
 /**
- * Asynchronously suggests changes to a task's source code using an advanced model.
- * @param {string} task - The task to suggest changes for.
- * @param {} file - A file to apply code to.
- * @returns {Promise<string>} - A Promise that resolves with the suggested changes.
+ * 使用高级模型异步建议对任务的源代码进行更改。
+ * @param {string} task - 要建议更改的任务。
+ * @param {} file - 要应用代码的文件。
+ * @returns {Promise<string>} - 一个解析为建议更改的 Promise。
  */
 async function finalAdvisor(task, payload) {
   const analysis = formatSolutions(payload.solutions)

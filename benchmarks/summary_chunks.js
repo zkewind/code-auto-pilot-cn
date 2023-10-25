@@ -6,7 +6,7 @@ const { review } = require('../agents/reviewer')
 
 let score = 0
 const loops = 1
-const task = "In some situations, summaries can have too many tokens to be processed in 1 go. Fix that by loop the summaries and split them by the max amount of 3000 tokens"
+const task = "在某些情况下，摘要可能包含太多的令牌，无法一次处理完。通过遍历摘要并将其分割为小于3000个令牌的数量来解决这个问题。"
 const criteria = [
     "none"
 ]
@@ -28,7 +28,7 @@ async function main(){
             score += 0
         }
     }
-    console.log('Final Score:', score/loops)
+    console.log('最终得分:', score/loops)
 }
 
 main()

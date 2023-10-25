@@ -31,7 +31,7 @@ async function main(){
             score += 0
         }
     }
-    console.log('Final Score:', score/loops)
+    console.log('最终得分:', score/loops)
 }
 
 main()

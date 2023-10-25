@@ -7,8 +7,8 @@ const { getCodeBaseAutopilotDirectory } = require('./autopilotConfig');
 DB_FILE_NAME = 'autopilot.db'
 
 /**
- * @description Creates the files table
- * @param {sqlite3.Database} db - The database to create the table in
+ * @description 创建文件表
+ * @param {sqlite3.Database} db - 要在其中创建表的数据库
  */
 function createFilesTable(db){
     const sql =`
@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS files (
 }
 
 /**
- * @description Creates the files table
- * @param {string} codeBaseAutopilotDirectory - The path to the .autopilot directory of the codebase
-*/
+ * @description 创建文件表
+ * @param {string} codeBaseAutopilotDirectory - 代码库的 .autopilot 目录的路径
+ */
 function createDB(codeBaseDirectory){
     const db = getDB(codeBaseDirectory)
     createFilesTable(db);
@@ -41,9 +41,9 @@ function getDBFilePath(codeBaseDirectory){
 }
 
 /**
- * @description Creates the files table
- * @param {string} codeBaseAutopilotDirectory
- * @returns {sqlite3.Database} db
+ * @description 创建文件表
+ * @param {string} codeBaseAutopilotDirectory - 代码库的 .autopilot 目录的路径
+ * @returns {sqlite3.Database} db - 数据库
  */
 function getDB(codeBaseDirectory){
     dbFilePath = getDBFilePath(codeBaseDirectory);
@@ -52,10 +52,10 @@ function getDB(codeBaseDirectory){
 }
 
 /**
- * Deletes the file at the specified file path from the "files" table in the SQLite database
- * located in the code base directory specified by the codeBaseDirectory parameter.
- * @param {string} codeBaseDirectory - The absolute path to the code base directory containing the SQLite database.
- * @param {string} filePath - The absolute path to the file to be deleted.
+ * 从指定的文件路径中删除 "files" 表中的文件
+ * 位于由 codeBaseDirectory 参数指定的代码库目录中的 SQLite 数据库。
+ * @param {string} codeBaseDirectory - 包含 SQLite 数据库的代码库目录的绝对路径。
+ * @param {string} filePath - 要删除的文件的绝对路径。
  */
 function deleteFile(codeBaseDirectory, filePath){
     db = getDB(codeBaseDirectory);
@@ -67,16 +67,16 @@ where path = ?`
 
 
 /**
- * @description Inserts or updates a file in the files table
- * @param {sqlite3.Database} db - The database to insert the file into
- * @param {object} file - The file to insert or update
- * @param {string} file.filePath - The relative path of the file
- * @param {string} file.fileContent - The content of the file
- * @param {number} file.fileTokensCount - The count of tokens in the file
- * @param {string} file.fileHash - The hash of the file content
- * @param {number} file.fileTimestamp - The timestamp when the file was last modified
- * @param {string} summary - The summary of the file
- * @param {string} dependenciesLibs - The dependencies of the file
+ * @description 向文件表中插入或更新文件
+ * @param {sqlite3.Database} db - 要插入文件的数据库
+ * @param {object} file - 要插入或更新的文件
+ * @param {string} file.filePath - 文件的相对路径
+ * @param {string} file.fileContent - 文件的内容
+ * @param {number} file.fileTokensCount - 文件中的令牌数
+ * @param {string} file.fileHash - 文件内容的哈希值
+ * @param {number} file.fileTimestamp - 文件上次修改的时间戳
+ * @param {string} summary - 文件的摘要
+ * @param {string} dependenciesLibs - 文件的依赖项
  */
 function insertOrUpdateFile(codeBaseDirectory, file, summary, dependenciesLibs){
     db = getDB(codeBaseDirectory);
