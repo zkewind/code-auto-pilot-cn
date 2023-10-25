@@ -1,93 +1,102 @@
-<h1 align="center">Autopilot - An AI developer</h1>
+# 加入 Discord
 
-<p align="center">
-  <strong>Autopilot</strong> is an AI tool that utilizes GPT to read a codebase, create context, and solve tasks that you request.
-</p>
+加入我们的对话 <https://discord.gg/r72ykfvyx7>
 
-<p align="center">
-  <img src="public/demo.gif" alt="Autopilot Demo" width="800"/>
-</p>
+# 工作原理
 
-# Join our discord
-Join the conversation at https://discord.gg/r72ykfvyx7
+1.  首先指向一个现有的代码库。
 
-# How it works 
+2.  自动扫描代码文件，并更新数据库中的代码文件描述元数据。（在代码库目录中）&#x20;
 
-1. You point Autopilot at a codebase with a task.
-2. AutoPilot generates and upkeeps a DB with metadata on the codebase files. (within the codebase directory)
-3. AutoPilot decides which existing files it needs for the task by using the metadata DB.
-4. AutoPilot tries to implement the requested task on each relevant file.
+3.  通过使用描述元数据来决定新编码任务需要哪些现有文件。&#x20;
 
-## Autopilot as a GitHub app
-You can use this project by installing the GitHub app available at https://github.com/marketplace/code-autopilot-ai-coder. This app uses autopilot to automatically resolve issues that you open on GitHub and also has features for Pull Request. It provides an easy interface to use and direct integration with Github.
+4.  尝试在每个相关文件上执行新的编码任务。
 
+## 作为 GitHub 应用程序的自动驾驶
 
-## Features
+你可以通过安装 GitHub 应用程序来使用此项目，该应用程序位于 [https://github.com/marketplace/code-autopilot-ai-coder.](https://github.com/marketplace/code-autopilot-ai-coder.该应用程序使用autopilot自动解决您在GitHub上打开的问题，并具有Pull)
 
-- 📚 - Pre-processes codebase files.
-- 🤖 - Implements code changes for you.
-- 🚀 - Parallel calls to agents where possible.
-- 📝 - Shows you what was updated. (Full process log with each AI interaction also produced)
-- 🕹️ - Interactive mode - see the process with retry, continue, abort options.
+该应用程序使用本项目自动解决你在 GitHub 上打开的问题，并具有 Pull Request 功能。它提供了一个易于使用的界面，并直接与 Github 集成。
 
-### Tasks expectations
-- Referencing current code:
-  - ✅ Referencing a specific file by project relative path.
-  - ✅ Referencing a specific file by file name only, ignoring the subdirectories path.
-  - ✅ Referencing a specific function within a file without the filename.
-  - ✅ Referencing a major business concept that is exclusively used in one file.
-  - ✅ Referencing all project files.
-  - 🤔 General logical requests. Your milage would differ by model, codebase and task. Some work. (Should introduce task scoring)
-- Changes executed:
-  - ✅Create a new file based on an existing file.
-  - ❌Start a new file from scratch.
-  - ✅Update an existing file.
-  - ✅Update multiple existing files.
-  - ❌Delete existing files. (It might empty them out, but not delete them currently)
-  - ❌Start using new 3rd party libraries. (Needs arbitrary code execution to install the library)
-  - ❌Cascade updating related files like tests. (Coming soon)
-  - ❌Test the code it wrote and self fix.
+## 功能
 
-## Prerequisites 
-nodejs v18 or above.
+-📚 - 预处理代码库文件。
+-🤖 - 为您实现代码更改。
+-🚀 - 尽可能并行调用代理。
+-📝 - 显示更新内容。（还生成了每个 AI 交互的完整过程日志）
+-🕹️ - 交互模式-查看具有重试、继续、中止选项的过程。
 
-## 🛠️ Installation
+### 开发路线图（根据当前代码）：
 
-1. Clone the repository: `git clone https://github.com/fjrdomingues/autopilot.git`
-2. Do `cd autopilot` to install dependencies: `npm ci`
-3. Create the `.env` file and set up the environment variables:
-   1. Copy the .env.template file to .env: `cp .env.template .env`
-   2. Set up an OpenAI API key and file with the key: `OPENAI_API_KEY=<your-api-key>`. [Create openAI API key](https://platform.openai.com/account/api-keys)
-   3. Set the path to your code `CODE_DIR=<path-to-your-code>` (or use `-d path-to-your-code` later)
-   4. Update `IGNORE_LIST=node_modules,coverage,public,__tests__`
-   5. Update `FILE_EXTENSIONS_TO_PROCESS=.js,.tsx,.ts,.jsx`
-   
-## Running
-* `node ui -t "YOUR_TASK"` - is the easiest way to start.
-  * Solutions will be auto applied on your code and a git diff shown if possible. 
-  * Alternatively you may specify `--auto-apply=false`.
-* `node ui -h` - will show you all the options.
+-✅ 按项目相对路径引用特定文件。
+-✅ 仅按文件名引用特定文件，忽略子目录路径。
+-✅ 在没有文件名的文件中引用特定函数。
+-✅ 引用专门用于一个文件中的主要业务概念。
+-✅ 引用所有项目文件。
+-🤔 一般逻辑请求。您的相似性会因模型、代码库和任务而异。有些工作。（应引入任务评分）-执行的更改：
+-✅ 基于现有文件创建新文件。
+-❌ 从头开始创建一个新文件。
+-✅ 更新现有文件。
+-✅ 更新多个现有文件。
+-❌ 删除现有文件。（它可能会清空它们，但当前不会删除它们）
+-❌ 开始使用新的第三方库。（需要执行任意代码才能安装库）
+-❌ 级联更新测试等相关文件。（即将推出）
+-❌ 测试它编写的代码并自行修复。
 
-## Interactive mode
-Use `node ui -i` for an interactive mode, here you can review the output of each step before proceeding.
+## 先决条件
 
-## 🤝 Contributing
+nodejs v18 或更高版本。
 
-**We are running autopilot on a server connected to the https://github.com/fjrdomingues/autopilot repository. New issues created will trigger autopilot and create a new Pull Request with a proposal. Running with gpt-4**
+## 🛠️ 安装
 
-We welcome contributions! Please submit pull requests to the repository, and ensure your changes align with the project's goals and guidelines. Together, we can make **Autopilot** an even more powerful and efficient tool for developers!
+1.克隆存储库：`git Clonehttps://github.com/fjrdomingues/autopilot.git`&#x20;
 
-### Running tests - all
-`npm run test` - runs all the tests
+2.执行"cd autopilot"以安装依赖项：`npm -ci`&#x20;
 
-### Running tests - Unit test
-`npm run unit-test` - runs the unit tests
+3.创建".env"文件并设置环境变量：&#x20;
 
-### Running tests - Benchmarks
-`npm run e2e-test` - runs the end to end tests
+&#x20; a.将.env.template 文件复制到.env:`cp .env.tmplate .env`&#x20;
 
-### Code structure
-- agents - interactions with language models.
-- modules - most other internal libs.
-- ui.js - The main().
-- logs - document a task run.
+&#x20; b.设置 OpenAI API 密钥：`OpenAI_API_key=<your-API-key>`。[创建 openAI API 密钥](https://platform.openai.com/account/api-keys) 3.设置代码的路径`code_DIR=<代码的路径>`（或稍后使用`-d代码的路径`） 4.更新`IGNORE_LIST=节点模块，覆盖范围，公共，__tests__` 5.更新`FILE_EXTENSIONS_TO_PROCESS=.js、.tsx、.ts、.jsx`
+
+## 正在运行
+
+- `node ui -t"YOUR_TASK"`-是最简单的启动方式。
+
+  - 解决方案将自动应用于您的代码，并在可能的情况下显示 git diff。
+
+  - 或者，您可以指定"--auto-apply\=false"。
+
+- "node ui -h"-将显示所有选项。
+
+## 交互模式
+
+使用"node ui -i"作为交互模式，在这里您可以在继续操作之前查看每个步骤的输出。
+
+## 🤝 贡献
+
+**我们正在连接到的服务器上运行自动驾驶仪**<https://github.com/fjrdomingues/autopilot 存储库。创建的新问题将触发自动驾驶，并创建一个带有提案的新Pull> Request。使用 gpt-4 运行
+
+我们欢迎捐款！请向存储库提交拉取请求，并确保您的更改符合项目的目标和指导方针。我们可以一起让它成为开发人员更强大、更高效的工具！
+
+### 正在运行测试-全部
+
+`npm run test` - 运行所有测试
+
+### 运行测试-单元测试
+
+`npm run unit-test` - 运行单元测试
+
+### 运行测试-基准
+
+`npm run e2e-test` - 运行端到端测试
+
+### 代码结构
+
+- agent - 代理，与语言模型的交互。
+
+- modules - 模块,大多数其他内部库。
+
+- ui.js - 主程序。
+
+- logs - 日志，记录任务运行。
