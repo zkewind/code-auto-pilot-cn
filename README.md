@@ -57,7 +57,13 @@ nodejs v18 或更高版本。
 
 &#x20; a.将.env.template 文件复制到.env:`cp .env.tmplate .env`&#x20;
 
-&#x20; b.设置 OpenAI API 密钥：`OpenAI_API_key=<your-API-key>`。[创建 openAI API 密钥](https://platform.openai.com/account/api-keys) 3.设置代码的路径`code_DIR=<代码的路径>`（或稍后使用`-d代码的路径`） 4.更新`IGNORE_LIST=节点模块，覆盖范围，公共，__tests__` 5.更新`FILE_EXTENSIONS_TO_PROCESS=.js、.tsx、.ts、.jsx`
+&#x20; b.设置 OpenAI API 密钥：`OpenAI_API_key=<your-API-key>`。[创建 openAI API 密钥](https://platform.openai.com/account/api-keys) ;
+
+&#x20; c.设置代码的路径`code_DIR=<代码的路径>`（或稍后使用`-d代码的路径`） `&#x20;
+
+4.更新 `IGNORE_LIST=node_modules,coverage,public,__tests__` &#x20;
+
+5.更新 `FILE_EXTENSIONS_TO_PROCESS=.js,.tsx,.ts,.jsx` &#x20;
 
 ## 正在运行
 
@@ -75,7 +81,7 @@ nodejs v18 或更高版本。
 
 ## 🤝 贡献
 
-**我们正在连接到的服务器上运行自动驾驶仪**<https://github.com/fjrdomingues/autopilot 存储库。创建的新问题将触发自动驾驶，并创建一个带有提案的新Pull> Request。使用 gpt-4 运行
+**我们正在连接到的服务器上运行自动驾驶仪**<https://github.com/fjrdomingues/autopilot> 存储库。创建的新问题将触发自动驾驶，并创建一个带有提案的新Pull Request。使用 gpt-4 运行。
 
 我们欢迎捐款！请向存储库提交拉取请求，并确保您的更改符合项目的目标和指导方针。我们可以一起让它成为开发人员更强大、更高效的工具！
 
