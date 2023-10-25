@@ -20,25 +20,25 @@ function logPath() {
 }
 
 /**
-Saves logs to the logs folder by appending the specified text to the end of the log file.
-@param {string} text - The text to be added to the log file.
-*/
+ * 将指定的文本追加到日志文件的末尾，将日志保存到日志文件夹中。
+ * @param {string} text - 要添加到日志文件的文本。
+ */
 function saveLog(text) {
     fs.appendFileSync(logPath(), `${text} \n\n*******\n\n`);
 }
 
 /**
-* Saves the given solution to a file in the "suggestions" folder and returns the path to the created file.
-* @param {string} solution - The solution to save to a file.
-* @returns {string} - The path to the created file.
-*/
+ * 将给定的解决方案保存到“suggestions”文件夹中的文件，并返回创建的文件的路径。
+ * @param {string} solution - 要保存到文件中的解决方案。
+ * @returns {string} - 创建的文件的路径。
+ */
 function saveOutput(solutions) {
-    // Save the solution to a file in the "suggestions" folder
-    const suggestionsDir = path.join(__dirname, '..' , outputFolder);
+    // 将解决方案保存到“suggestions”文件夹中的文件
+    const suggestionsDir = path.join(__dirname, '..', outputFolder);
     const fileName = `${Date.now()}.patch`;
    
     const filePath = path.join(suggestionsDir, fileName)
-    // Get solutions from array and format to save
+    // 从数组中获取解决方案并格式化以保存
     let content = ''
     solutions.map(file => {
         content += "File: " + file.file
@@ -52,17 +52,17 @@ function saveOutput(solutions) {
 
 /**
  *
- * @param {string} filePath - The path to the file to be updated.
- * @param {string} content - The new contents of the file.
- * @description Updates the file at filePath with the contents of content.
+ * @param {string} filePath - 要更新的文件的路径。
+ * @param {string} content - 文件的新内容。
+ * @description 使用content的内容更新filePath处的文件。
  */
 function updateFile(filePath, content) {
     fs.writeFileSync(filePath, content, { flag: 'w' }, (err) => {
         if (err) {
         console.error(err);
-        throw new Error("Error writing file" + err);
+        throw new Error("写入文件时出错" + err);
         }
-        console.log(`The file ${filePath} has been updated.`);
+        console.log(`文件${filePath}已更新。`);
     });
 }
 

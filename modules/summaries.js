@@ -17,12 +17,12 @@ const types = {
 };
 
 /**
-Splits an array of summary strings into chunks up to a maximum size.
-@param {string} summaries - An array of summary strings to chunk.
-@param {number} maxChunkLength - The maximum length of each chunk.
-@returns {string[]} An array of arrays, where each sub-array contains summary strings that are up to maxChunkLength characters long.
-@throws {Error} If a single summary string is longer than maxChunkLength.
-*/
+ * 将一个摘要字符串数组分成最大长度为maxChunkLength的块。
+ * @param {string} summaries - 要分块的摘要字符串数组。
+ * @param {number} maxChunkLength - 每个块的最大长度。
+ * @returns {string[]} 一个数组，其中每个子数组包含最多maxChunkLength个字符的摘要字符串。
+ * @throws {Error} 如果单个摘要字符串的长度超过maxChunkLength。
+ */
 function chunkSummaries(summaries, maxChunkLength) {
   maxChunkLength = parseInt(maxChunkLength);
   const summaryChunks = [];
@@ -34,7 +34,7 @@ function chunkSummaries(summaries, maxChunkLength) {
     const currentSummaryTokens = countTokens(summary);
 
     if (currentSummaryTokens > maxChunkLength) {
-      throw new Error('Single summary is too big');
+      throw new Error('单个摘要太大');
     }
 
     const currentChunkTokens = countTokens(currentChunk);
@@ -55,14 +55,14 @@ function chunkSummaries(summaries, maxChunkLength) {
 }
 
 /**
- * Gets all .ai.txt files (summaries)
- * @param {boolean} test - If true, reads files only in the 'benchmarks' directory.
- * @returns {Promise<string>} A string containing all the summaries concatenated together.
+ * 获取所有的.ai.txt文件（摘要）
+ * @param {boolean} test - 如果为true，则仅读取“benchmarks”目录中的文件。
+ * @returns {Promise<string>} 包含所有摘要串联在一起的字符串。
  */
 async function readAllSummaries(codeBaseDirectory) {
   const db = getDB(codeBaseDirectory);
   const sql = `
-  SELECT path, summary 
+  SELECT path, summary
   FROM files`;
   const summaries = await new Promise((resolve, reject) => {
     db.all(sql, (err, rows) => {
@@ -73,10 +73,10 @@ async function readAllSummaries(codeBaseDirectory) {
       }
     });
   });
-  
+
   if (typeof summaries === 'undefined' || summaries.length === 0) {
-    console.log("No matching files found in the database. Indexing is required.");
-    throw new Error("Cannot run without summaries. Indexing is required.");
+    console.log("数据库中找不到匹配的文件。需要进行索引。");
+    throw new Error("没有摘要无法运行。需要进行索引。");
   }
 
   let summariesString = "";
@@ -84,33 +84,32 @@ async function readAllSummaries(codeBaseDirectory) {
     try {
       summariesString += `File Path: ${summary.path}\nSummary:\n${summary.summary}${summaryStringDelimiter}`;
     } catch (error) {
-      console.error("Error reading summary from database:", error);
+      console.error("从数据库读取摘要时出错：", error);
     }
   }
   return summariesString;
 }
 
 /**
- * Fetches and validates summaries for a given test.
- * @param {boolean} test - Setting for internal tests.
- * @param {string} codeBaseDirectory - The directory to search for summaries.
- * @returns {Promise<Array<Summary>>} A Promise that resolves to an array of summary objects.
+ * 获取摘要并进行验证。
+ * @param {boolean} test - 用于内部测试的设置。
+ * @param {string} codeBaseDirectory - 要搜索摘要的目录。
+ * @returns {Promise<Array<Summary>>} 一个解析为摘要对象数组的 Promise。
  */
 async function getSummaries(codeBaseDirectory){
   const summaries = await readAllSummaries(codeBaseDirectory);
   const summariesTokenCount = countTokens(JSON.stringify(summaries))
-  console.log(`Tokens in Summaries: ${chalk.yellow(summariesTokenCount)}`)
+  console.log(`摘要中的令牌数：${chalk.yellow(summariesTokenCount)}`)
 
   return summaries
 }
 
 
 /**
- * Processes a file by generating a summary
- * and writing the summary to a new file.
- * @param {string} codeBaseDirectory - The directory of the file being processed.
- * @param {string} filePathRelative - The relative path of the file being processed.
- * @param {string} fileContent - The content of the file being processed.
+ * 处理文件，生成摘要并将摘要写入新文件。
+ * @param {string} codeBaseDirectory - 正在处理的文件所在的目录。
+ * @param {string} filePathRelative - 正在处理的文件的相对路径。
+ * @param {string} fileContent - 正在处理的文件的内容。
  */
 async function generateAndWriteFileSummary(codeBaseDirectory, filePathRelative, fileContent) {
   const { fileSummary } = require('../agents/indexer');
@@ -119,13 +118,13 @@ async function generateAndWriteFileSummary(codeBaseDirectory, filePathRelative, 
   const parsedFile = parseFileContent(codeBaseDirectory, filePathFull, fileContent);
   const fileTokensCount = parsedFile.fileTokensCount;
 
-  console.log(`Processing file: ${chalk.yellow(filePathRelative)}`);
+  console.log(`处理文件：${chalk.yellow(filePathRelative)}`);
   if (fileTokensCount > maxTokenSingleFile) {
-    console.log(chalk.red('File too BIG'));
+    console.log(chalk.red('文件太大'));
     return;
   }
   if (fileTokensCount == 0) {
-    console.log(chalk.yellow('File Empty'));
+    console.log(chalk.yellow('文件为空'));
     return;
   }
 
@@ -133,13 +132,13 @@ async function generateAndWriteFileSummary(codeBaseDirectory, filePathRelative, 
     const output = await fileSummary(filePathRelative, fileContent);
 
     if (output) {
-      // Keywords
+      // 关键词
       let keywordsString = "";
       keywords = output.keywords;
       for (const keyword of keywords){
         keywordsString += `${keyword.term} - ${keyword.definition}\n`;
       }
-      // functions
+      // 函数
       let functionsString = `functions: ${output.functions}`;
       const summary = output.summary + "\n" + functionsString + "\n" + keywordsString;
       // dependenciesLibs
@@ -147,13 +146,13 @@ async function generateAndWriteFileSummary(codeBaseDirectory, filePathRelative, 
       for (const dependenciesLib of output.dependenciesLibs){
         dependenciesLibsString += `${dependenciesLib}, `;
       }
-      // Save to DB
+      // 保存到数据库
       insertOrUpdateFile(codeBaseDirectory, parsedFile, summary, dependenciesLibsString);
-    
-      console.log(`${chalk.green(`Updated summary for `)}${chalk.yellow(filePathRelative)}`);
+
+      console.log(`${chalk.green(`更新了 `)}${chalk.yellow(filePathRelative)}${chalk.green(` 的摘要`)}`);
     }
   } catch (error) {
-    console.error(`Error processing file: ${filePathRelative}`, error);
+    console.error(`处理文件时出错：${filePathRelative}`, error);
   }
 }
 

@@ -6,42 +6,42 @@ describe('getRelevantFiles', () => {
   const summaries = `
 File Path: modules/gpt.js
 Summary:
-A module that exports two functions for calling OpenAI's GPT API and verifying the model used.
-functions: callGPT,verifyModel
-modelCostMap - A map that contains the cost of using different GPT models.
-configuration - An object that contains the OpenAI API key.
-openai - An object that contains the OpenAI API.
+一个导出两个函数以调用OpenAI的GPT API并验证所使用模型的模块。
+函数：callGPT，verifyModel
+modelCostMap - 包含使用不同GPT模型的成本的映射。
+configuration - 包含OpenAI API密钥的对象。
+openai - 包含OpenAI API的对象。
 
 ---
 File Path: agents/coder.js
 Summary:
-Exports a function that asynchronously suggests changes to a task's source code using an advanced model.
-functions: suggestChanges,formatCode
-PromptTemplate - A class that generates a prompt from a template and input variables.
-StructuredOutputParser - A class that parses structured output from a model.
-OutputFixingParser - A class that fixes output from a model that does not conform to a schema.
-getModel - A function that returns a model.
-saveLog - A function that saves a log to a file.
-formatCode - A function that formats the code from the given file object into a Markdown code block.
+使用高级模型异步建议更改任务源代码的函数。
+函数：suggestChanges，formatCode
+PromptTemplate - 从模板和输入变量生成提示的类。
+StructuredOutputParser - 从模型解析结构化输出的类。
+OutputFixingParser - 修复不符合模式的模型输出的类。
+getModel - 返回模型的函数。
+saveLog - 将日志保存到文件的函数。
+formatCode - 将给定文件对象中的代码格式化为Markdown代码块的函数。
 
 ---
 `;
 
   const testCases = [
     {
-      task: 'Create a new file named: "newFILE.js"',
+      task: '创建一个名为："newFILE.js"的新文件',
       expectedOutput: []
     },
     {
-      task: 'in coder.js, create a new function called newFunction',
+      task: '在coder.js中创建一个名为newFunction的新函数',
       expectedOutput: ['agents/coder.js']
     },
     {
-      task: 'update the verifyModel function',
+      task: '更新verifyModel函数',
       expectedOutput: ['modules/gpt.js']
     },
     {
-      task: 'Add license info to the top of all my files',
+      task: '将许可信息添加到所有文件的顶部',
       expectedOutput: ['agents/coder.js', 'modules/gpt.js']
     }
   ];

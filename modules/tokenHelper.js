@@ -1,9 +1,9 @@
 const { get_encoding } = require('@dqbd/tiktoken');
 
 /**
-* Counts the number of tokens in the input string.
-* @param {string} input - The input string to tokenize.
-* @returns {number} - The number of tokens in the input string.
+* 计算输入字符串中的令牌数量。
+* @param {string} input - 要进行令牌化的输入字符串。
+* @returns {number} - 输入字符串中的令牌数量。
 */
 function countTokens(input) {
 	const encoder = get_encoding("cl100k_base")

@@ -1,17 +1,17 @@
 const { callGPT } = require('../modules/gpt');
 const { jsonParseWithValidate } = require('../modules/jsonHelpers');
 
-// TODO: convert to generic agent
+// TODO: 转换为通用代理
 /**
- * Performs a code review based on a given task and patch diff, according to the specified evaluation criteria.
- * @param {string} task - The user input task to be solved by the patch diff.
- * @param {string} diff - The suggested patch diff to be reviewed.
- * @param {string[]} criteria - The evaluation criteria to be taken into account during the review.
- * @returns {Object} - A response object containing the reviewer's thoughts and evaluation of the patch diff in a valid JSON format.
+ * 根据给定的任务和补丁差异执行代码审查，根据指定的评估标准进行评估。
+ * @param {string} task - 要由补丁差异解决的用户输入任务。
+ * @param {string} diff - 要审查的建议补丁差异。
+ * @param {string[]} criteria - 在审查过程中要考虑的评估标准。
+ * @returns {Object} - 包含审阅者对补丁差异的思考和评估的响应对象，以有效的 JSON 格式返回。
  */
 async function review(task, diff, criteria) {
-    const prompt = 
-` 
+    const prompt =
+`
 USER INPUT: ${task}
 YOUR TASK: You are a senior software developer reviewing a patch. Your task is to evaluate if the PATCH DIFF solves the USER INPUT. Take into account the points in the "Evaluation Criteria"
 Evaluation Criteria:
@@ -43,6 +43,6 @@ RESPONSE FORMAT - This is the format of your reply. Ensure the response can be p
 
     const reply = await callGPT(prompt, process.env.REVIEWER_MODEL);
     return jsonParseWithValidate(reply);
-  }
+}
 
 module.exports = { review }

@@ -1,9 +1,9 @@
 const { loadFiles } = require('./fsInput');
 
 /**
- * Calculates the total size of a directory by summing the length of all files in the directory.
- * @param {string} dir - The directory path to calculate the size of.
- * @returns {number} - The total size of the directory in bytes.
+ * 计算目录的总大小，通过对目录中所有文件的长度求和。
+ * @param {string} dir - 要计算大小的目录路径。
+ * @returns {number} - 目录的总大小（以字节为单位）。
  */
 function getDirectoryTokensCount(dir) {
   let directoryTokensCount = 0;

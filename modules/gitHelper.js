@@ -1,7 +1,7 @@
 const simpleGit = require('simple-git');
 
 /**
- * Returns the output of git diff as a string.
+ * 作为字符串返回git diff的输出。
  */
 async function getGitDiff(dir) {
   try {
@@ -9,17 +9,17 @@ async function getGitDiff(dir) {
     const diff = await git.diff();
     return diff;
   } catch (error) {
-    console.error(`Error executing git diff: ${error}`);
+    console.error(`执行git diff时出错: ${error}`);
     return '';
   }
 }
 
 /**
- * Prints the output of git diff to the console.
+ * 将git diff的输出打印到控制台。
  */
 async function printGitDiff(dir) {
   const diff = await getGitDiff(dir);
-  console.log(`Git diff output:\n${diff}`);
+  console.log(`Git diff输出:\n${diff}`);
 }
 
 module.exports = {

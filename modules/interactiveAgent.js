@@ -2,20 +2,20 @@ const prompts = require('prompts');
 const chalk = require('chalk');
 
 /**
- * @description Asynchronous function that runs an agent function with given variables.
- * @param {function} agentFunction - The agent function to be executed asynchronously.
- * @param {any} var1 - The first variable to be passed as an argument to the agent function.
- * @param {any} var2 - The second variable to be passed as an argument to the agent function.
- * @param {boolean} interactive=false - A boolean indicating whether or not to prompt the user for approval after running the agent function.
- * @returns {Promise<any>} A Promise that resolves with the return value of the agent function if not in interactive mode, otherwise resolves or rejects based on user input.
+ * @description 异步函数，使用给定的变量运行代理函数。
+ * @param {function} agentFunction - 要异步执行的代理函数。
+ * @param {any} var1 - 作为参数传递给代理函数的第一个变量。
+ * @param {any} var2 - 作为参数传递给代理函数的第二个变量。
+ * @param {boolean} interactive=false - 一个布尔值，指示是否在运行代理函数后提示用户进行批准。
+ * @returns {Promise<any>} 如果不是交互模式，则返回代理函数的返回值的 Promise；否则根据用户输入返回或拒绝 Promise。
 */
 async function runAgent(agentFunction, var1, var2, interactive=false){
-  console.log(`Agent ${chalk.yellow(agentFunction.name)} is running.`);
+  console.log(`代理 ${chalk.yellow(agentFunction.name)} 正在运行。`);
   if (!interactive){
     return await agentFunction(var1, var2);
   }
 
-  // interactive
+  // 交互模式
   res = await agentFunction(var1, var2);
   console.dir(res, { depth: null })
   const proceed = await prompts({

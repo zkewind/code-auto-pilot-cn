@@ -9,13 +9,13 @@ const ignoreList = process.env.IGNORE_LIST.split(',');
 const fileExtensionsToProcess = process.env.FILE_EXTENSIONS_TO_PROCESS.split(',');
 
 /**
- * Recursively scans the directory specified by 'dir', searching for project files.
- * Project files are identified based on their file extension (defined in 'fileExtensionsToProcess').
- * If a subdirectory is encountered, it will be recursively searched unless it's in the 'ignoreList'.
- * @param {string} dir - The path of the directory to scan for project files.
- * @param {string[]} ignoreList - An array of directory names to ignore.
- * @param {string[]} fileExtensionsToProcess - An array of file extensions to search for.
- * @returns {string[]} An array of absolute file paths for all project files found.
+ * 递归扫描由'dir'指定的目录，搜索项目文件。
+ * 根据文件扩展名（在'fileExtensionsToProcess'中定义）来识别项目文件。
+ * 如果遇到子目录，除非它在'ignoreList'中，否则将递归搜索它。
+ * @param {string} dir - 要扫描项目文件的目录路径。
+ * @param {string[]} ignoreList - 要忽略的目录名称数组。
+ * @param {string[]} fileExtensionsToProcess - 要搜索的文件扩展名数组。
+ * @returns {string[]} 所有找到的项目文件的绝对文件路径数组。
 */
 function getFilePaths(dir) {
 	const files = fs.readdirSync(dir);
@@ -37,16 +37,16 @@ function getFilePaths(dir) {
 
 
 /**
- * Parses the file content and returns an object with relevant file information.
- * @param {string} dir - The directory path of the file.
- * @param {string} filePathFull - The path of the file.
- * @param {string} fileContent - The content of the file.
- * @returns {object} - An object with the following properties:
-	* filePath: The relative path of the file.
-	* fileContent: The content of the file.
-	* fileTokensCount: The count of tokens in the file.
-	* fileHash: The hash of the file content.
-    * fileTimestamp: The timestamp when the file was last modified.
+ * 解析文件内容并返回包含相关文件信息的对象。
+ * @param {string} dir - 文件所在的目录路径。
+ * @param {string} filePathFull - 文件的路径。
+ * @param {string} fileContent - 文件的内容。
+ * @returns {object} - 一个包含以下属性的对象：
+	* filePath: 文件的相对路径。
+	* fileContent: 文件的内容。
+	* fileTokensCount: 文件中的令牌数。
+	* fileHash: 文件内容的哈希值。
+    * fileTimestamp: 文件上次修改的时间戳。
  */
 function parseFileContent(dir, filePathFull, fileContent) {
 	const fileTokensCount = countTokens(fileContent);
@@ -65,15 +65,15 @@ function parseFileContent(dir, filePathFull, fileContent) {
 }
 
 /**
- * Loads and hashes all project files in the specified directory.
- * @param {string} dir - The directory to load and hash project files from.
+ * 加载并哈希指定目录中的所有项目文件。
+ * @param {string} dir - 要从中加载和哈希项目文件的目录。
  * @returns {Array<{
-	* filePath: string, // The relative path of the file.
-	* fileContent: string, // The content of the file.
-	* fileTokensCount: number, // The count of tokens in the file.
-	* fileHash: string, // The hash of the file content.
-	* fileTimestamp: string // The timestamp when the file was last modified.
- * }>} - An array of objects containing file details retrieved from the database.
+	* filePath: string, // 文件的相对路径。
+	* fileContent: string, // 文件的内容。
+	* fileTokensCount: number, // 文件中的令牌数。
+	* fileHash: string, // 文件内容的哈希值。
+	* fileTimestamp: string // 文件上次修改的时间戳。
+ * }>} - 包含从数据库中检索到的文件详细信息的对象数组。
  */
 function loadFiles(dir) {
 
@@ -95,11 +95,9 @@ function loadFiles(dir) {
 
 
 /**
- * Takes an array of file objects, each with a path property, and returns an array of file objects,
- * each with a path property and a code property containing the file's contents.
- * @param {FileObject[]} files - An array of file objects, each with a path property.
- * @returns {FileObject[]} - An array of file objects,
- * each with a path property and a code property containing the file's contents.
+ * 将一个具有路径属性的文件对象数组转换为具有路径属性和代码属性（包含文件内容）的文件对象数组。
+ * @param {FileObject[]} files - 一个具有路径属性的文件对象数组。
+ * @returns {FileObject[]} - 一个具有路径属性和代码属性（包含文件内容）的文件对象数组。
  */
 function getFiles(codeBaseDirectory, files){
 	let retFiles=[]
