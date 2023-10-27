@@ -18,7 +18,7 @@ function getOptions(task, test){
   .option('interactive', {
     alias: 'i',
     describe: '是否以交互模式运行',
-    default: false,
+    default: true,
     type: 'boolean'
   })
   .option('task', {
