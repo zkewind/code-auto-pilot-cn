@@ -6,3 +6,5 @@ docs
 web
 logs
 .DS_Store
+/.idea/
+/temp/
