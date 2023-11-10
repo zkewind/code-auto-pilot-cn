@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const outputFolder = 'suggestions';
 const logsDirectory = 'logs';
-const logsExtension = '.txt';
+const logsExtension = '.md';
 let logsFilename;
 
 function newLog(){
@@ -36,7 +36,7 @@ function saveOutput(solutions) {
     // 将解决方案保存到“suggestions”文件夹中的文件
     const suggestionsDir = path.join(__dirname, '..', outputFolder);
     const fileName = `${Date.now()}.patch`;
-   
+
     const filePath = path.join(suggestionsDir, fileName)
     // 从数组中获取解决方案并格式化以保存
     let content = ''
